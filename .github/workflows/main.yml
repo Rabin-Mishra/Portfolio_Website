@@ -1,0 +1,37 @@
+name: Next.JS Artiacts and Caching 
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-nextjs-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5.0.0
+
+      - name: Setup Node JS
+        uses: actions/setup-node@v5.0.0
+        with:
+          node-version: 22.x
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build NextJs App
+        run: npm run build
+
+      - name: Upload Build on Artifacts
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: next-js-build
+          path: out/
+
+      
+          
+
+      
+  
